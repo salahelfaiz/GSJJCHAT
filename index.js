@@ -1,29 +1,26 @@
 
-
+// We enclose this in window.onload.
+// So we don't have ridiculous errors.
 window.onload = function() {
-
-
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyD-zW5xIpyRQGHxtziF6T_ZaXUGc8lSoQQ",
-        authDomain: "gsjj-chat.firebaseapp.com",
-        databaseURL: "https://gsjj-chat-default-rtdb.firebaseio.com",
-        projectId: "gsjj-chat",
-        storageBucket: "gsjj-chat.appspot.com",
-        messagingSenderId: "998488122645",
-        appId: "1:998488122645:web:98abf7560fa325c6ae751c"
-      };
-      firebase.initializeApp(firebaseConfig);
-
-
-
-
+  const firebaseConfig = {
+    apiKey: "AIzaSyD-zW5xIpyRQGHxtziF6T_ZaXUGc8lSoQQ",
+    authDomain: "gsjj-chat.firebaseapp.com",
+    databaseURL: "https://gsjj-chat-default-rtdb.firebaseio.com",
+    projectId: "gsjj-chat",
+    storageBucket: "gsjj-chat.appspot.com",
+    messagingSenderId: "998488122645",
+    appId: "1:998488122645:web:98abf7560fa325c6ae751c"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  // This is very IMPORTANT!! We're going to use "db" a lot.
   var db = firebase.database()
-
-  class GSJJ_Chat{
+  // We're going to use oBjEcT OrIeNtEd PrOgRaMmInG. Lol
+  class GSJJ_CHAT{
     // Home() is used to create the home page
     home(){
-
+      // First clear the body before adding in
+      // a title and the join form
       document.body.innerHTML = ''
       this.create_title()
       this.create_join_form()
@@ -43,7 +40,7 @@ window.onload = function() {
 
       var title = document.createElement('h1')
       title.setAttribute('id', 'title')
-      title.textContent = 'GSJJ Deroua Chat'
+      title.textContent = 'GSJJ DEROUA CHAT'
 
       title_inner_container.append(title)
       title_container.append(title_inner_container)
@@ -64,15 +61,15 @@ window.onload = function() {
 
       var join_button = document.createElement('button')
       join_button.setAttribute('id', 'join_button')
-      join_button.innerHTML = 'Join <i class="fas fa-sign-in-alt"></i>'
+      join_button.innerHTML = 'Entrer <i class="fas fa-sign-in-alt"></i>'
 
       var join_input_container = document.createElement('div')
       join_input_container.setAttribute('id', 'join_input_container')
 
       var join_input = document.createElement('input')
       join_input.setAttribute('id', 'join_input')
-      join_input.setAttribute('maxlength', 30)
-      join_input.placeholder = 'Your Name'
+      join_input.setAttribute('maxlength', 15)
+      join_input.placeholder = 'Votre Nom'
       // Every time we type into the join_input
       join_input.onkeyup  = function(){
         // If the input we have is longer that 0 letters
@@ -149,14 +146,14 @@ window.onload = function() {
       var chat_input_send = document.createElement('button')
       chat_input_send.setAttribute('id', 'chat_input_send')
       chat_input_send.setAttribute('disabled', true)
-      chat_input_send.innerHTML = `<i class="far fa-paper-plane"></i>`
+      chat_input_send.innerHTML = `<i class="">Envoyer</i>`
 
       var chat_input = document.createElement('input')
       chat_input.setAttribute('id', 'chat_input')
       // Only a max message length of 1000
       chat_input.setAttribute('maxlength', 1000)
       // Get the name of the user
-      chat_input.placeholder = `${parent.get_name()}. Say something...`
+      chat_input.placeholder = `Ecrivez Votre message`
       chat_input.onkeyup  = function(){
         if(chat_input.value.length > 0){
           chat_input_send.removeAttribute('disabled')
@@ -167,7 +164,6 @@ window.onload = function() {
             if(chat_input.value.length <= 0){
               return
             }
-
             // Enable the loading circle in the 'chat_content_container'
             parent.create_load('chat_content_container')
             // Send the message. Pass in the chat_input.value
@@ -187,7 +183,7 @@ window.onload = function() {
 
       var chat_logout = document.createElement('button')
       chat_logout.setAttribute('id', 'chat_logout')
-      chat_logout.textContent = `${parent.get_name()} • logout`
+      chat_logout.textContent = `${parent.get_name()} • se déconnecter`
       // "Logout" is really just deleting the name from the localStorage
       chat_logout.onclick = function(){
         localStorage.clear()
@@ -329,12 +325,8 @@ window.onload = function() {
 
     }
   }
-
-
-
-
   // So we've "built" our app. Let's make it work!!
-  var app = new GSJJ_Chat ()
+  var app = new GSJJ_CHAT()
   // If we have a name stored in localStorage.
   // Then use that name. Otherwise , if not.
   // Go to home.
